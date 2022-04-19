@@ -1,0 +1,67 @@
+<h3 id="welcome-to-image-processing-api">Welcome to Image Processing API</h3>
+<h3 id="description">Description</h3>
+<p>Image Processing API is a backend service to resize images by width or height or both.</p>
+<p>You can add your images with original size to &#39;./assets/full&#39; directory.</p>
+<p>Open &quot;<a href="http://127.0.0.1:3000/">http://127.0.0.1:3000/</a>&quot; url with the filename, width, height queries to get the resized image.</p>
+<p>You will find the resized images cached in &#39;./assets/thumbs&#39; directory.</p>
+<p>Note: To know how to write your request query, jump to API Reference section.</p>
+<h3 id="technologies">Technologies</h3>
+<ol>
+<li>Node.js</li>
+<li>Typescript</li>
+<li>Express</li>
+<li>Jasmine</li>
+<li>ESlint</li>
+<li>Prettier</li>
+<li>Sharp</li>
+<li>Joi</li>
+</ol>
+<h3 id="getting-started">Getting Started</h3>
+<p>To run this project follow these steps:</p>
+<ol>
+<li>Run <code>npm run start</code> </li>
+<li>open the address &quot;<a href="http://127.0.0.1:3000/">http://127.0.0.1:3000/</a>&quot; in your browser</li>
+</ol>
+<h3 id="api-reference">API Reference</h3>
+<ol>
+<li><p>GET /</p>
+<ul>
+<li><code>curl http://127.0.0.1:3000/</code> </li>
+<li>Opens the home page with the REAMDME instructions</li>
+</ul>
+</li>
+<li><p>GET /images</p>
+<ul>
+<li><code>curl http://127.0.0.1:3000/images</code> </li>
+<li><p>Returns 400 Bad request error with message &quot;filename is required&quot;</p>
+</li>
+<li><p><code>curl http://127.0.0.1:3000/images?filename={fileName}</code> </p>
+</li>
+<li>Returns the original image file if the image valid (exists in &#39;./assets/full&#39; directory)</li>
+<li><p>Returns 404 Not Found error with message &quot;The image not found&quot; if the image invalid and not exists.</p>
+</li>
+<li><p><code>curl http://127.0.0.1:3000/images?filename={fileName}&amp;width={width}</code> </p>
+</li>
+<li>Returns the resized image file by the provided width and the height equal to the width.</li>
+<li><p>Returns 400 Bad request error with message &quot;width must be a number&quot; if the width is not number.</p>
+</li>
+<li><p><code>curl http://127.0.0.1:3000/images?filename={fileName}&amp;height={height}</code> </p>
+</li>
+<li>Returns the resized image file by the provided height and the width equal to the height.</li>
+<li><p>Returns 400 Bad request error with message &quot;height must be a number&quot; if the height is not number.</p>
+</li>
+<li><p><code>curl http://127.0.0.1:3000/images?filename={fileName}&amp;width={width}&amp;height={height}</code> </p>
+</li>
+<li>Returns the resized image file by the provided width and height (w x h).</li>
+<li>Returns 400 Bad request error with message &quot;height must be a number&quot; if the height is not number.</li>
+</ul>
+</li>
+</ol>
+<h3 id="testing">Testing</h3>
+<p>The project is tested via Jasmine
+Run the test specs with <code>npm run test</code> command</p>
+<h3 id="contribution">Contribution</h3>
+<p>Install node: &quot;<a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a>&quot;
+Install Dependencies: run <code>npm install</code></p>
+<h3 id="authoer">Authoer</h3>
+<p>Eman Abdallah</p>
