@@ -45,12 +45,14 @@ To run this project follow these steps:
     - Returns 404 Not Found error with message "The image not found" if the image invalid and not exists.
 
     - `curl http://127.0.0.1:3000/images?filename={fileName}&width={width}` 
-    - Returns the resized image file by the provided width and the height equal to the width.
+    - Returns the resized image file by the provided width and the height equal to the width (w x w).
     - Returns 400 Bad request error with message "width must be a number" if the width is not number.
+    - Returns 400 Bad request error with message "width must be greater than 0" if the width is less than or equal 0.
 
     - `curl http://127.0.0.1:3000/images?filename={fileName}&height={height}` 
-    - Returns the resized image file by the provided height and the width equal to the height.
+    - Returns the resized image file by the provided height and the width equal to the height (h x h).
     - Returns 400 Bad request error with message "height must be a number" if the height is not number.
+    - Returns 400 Bad request error with message "height must be greater than 0" if the height is less than or equal 0.
 
     - `curl http://127.0.0.1:3000/images?filename={fileName}&width={width}&height={height}` 
     - Returns the resized image file by the provided width and height (w x h).
@@ -66,5 +68,5 @@ Run the test specs with ```npm run test``` command
 Install node: "https://nodejs.org/en/download/"
 Install Dependencies: run ```npm install```
 
-### Authoer ###
+### Author ###
 Eman Abdallah

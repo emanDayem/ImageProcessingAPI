@@ -7,7 +7,7 @@ import cacheChecker from "./middleware/cacheChecker";
 export const app = express();
 const port = 3000;
 
-app.get("/", (_req: Request, res: Response) => {
+app.get("/", (_req: Request, res: Response): void => {
   res.status(200).sendFile(path.join(__dirname, "index.html"));
 });
 
@@ -16,6 +16,6 @@ app.use(queryValidator);
 app.use(cacheChecker);
 app.use("/images", imagesRoutes);
 
-app.listen(port, () => {
+app.listen(port, (): void => {
   console.log(`Server started at http:\\localhost:${port}`);
 });

@@ -1,37 +1,34 @@
 import express, { Request, Response } from "express";
-import { getImagesDir, getResizedImageName } from "./../../utils/util";
-import sharp from "sharp";
-import path from "path";
+import { getImagesDir, getImagePath } from "../../utils";
+import { resize } from "../../utils/imageProcessing";
 const imagesRoutes = express.Router();
 
-imagesRoutes.get("/", async (req: Request, res: Response) => {
+imagesRoutes.get("/", async (req: Request, res: Response): Promise<void> => {
   const { filename, width, height } = req.query;
-  const originalImageFile: string = path.join(
+  const originalImageFile: string = getImagePath(
     getImagesDir(__dirname, "full"),
-    (filename as string) + ".jpg"
+    filename as string,
+    undefined,
+    undefined
   );
-  const resizedImagePath: string = path.join(
+  const resizedImagePath: string = getImagePath(
     getImagesDir(__dirname, "thumbs"),
-    getResizedImageName(filename as string, width as string, height as string)
+    filename as string,
+    width as string,
+    height as string
   );
 
   if (!(width || height)) {
     // width & height are undefined
     res.sendFile(originalImageFile);
     return;
-  } else if (width && height) {
-    //width & height are defined
-    await sharp(originalImageFile as string)
-      .resize(+(width as unknown as number), +(height as unknown as number))
-      .toFile(resizedImagePath);
   } else {
-    // height or width undefined
-    const resizeFactor: number = width
-      ? +(width as unknown as number)
-      : +(height as unknown as number);
-    await sharp(originalImageFile as string)
-      .resize(resizeFactor)
-      .toFile(resizedImagePath);
+    await resize(
+      originalImageFile,
+      resizedImagePath,
+      +(width as unknown as number),
+      +(height as unknown as number)
+    );
   }
   res.sendFile(resizedImagePath);
   return;

@@ -1,22 +1,22 @@
 import { NextFunction, Request, Response } from "express";
 import {
   checkFileExists,
-  getResizedImageName,
+  getImagePath,
   createDirIfNotExists,
   getImagesDir,
-} from "../utils/util";
-import path from "path";
+} from "../utils";
 
 const cachedImagesPath = getImagesDir(__dirname, "thumbs");
 const cacheChecker = (req: Request, res: Response, next: NextFunction) => {
   const { filename, width, height } = req.query;
-  const resizedImageName: string = getResizedImageName(
+  const resizedImagePath: string = getImagePath(
+    cachedImagesPath,
     filename as string,
     width as string,
     height as string
   );
-  if (checkFileExists(cachedImagesPath, resizedImageName)) {
-    res.sendFile(path.join(cachedImagesPath, resizedImageName));
+  if (checkFileExists(resizedImagePath)) {
+    res.sendFile(resizedImagePath);
     return;
   }
   createDirIfNotExists(cachedImagesPath);
