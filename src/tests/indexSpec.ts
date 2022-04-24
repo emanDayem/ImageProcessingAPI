@@ -307,26 +307,26 @@ describe("app test", () => {
     });
 
     it("test getImagePath with width and height", async () => {
-      const actualOutput = getImagePath("E:/Folder", "file", "300", "500");
+      const actualOutput = getImagePath(path.join("E:", "Folder"), "file", "300", "500");
       const expectedOutput = path.join("E:", "Folder", "file_w300_h500.jpg");
       expect(actualOutput).toBe(expectedOutput);
     });
 
     it("test getImagePath with width only", async () => {
-      const actualOutput = getImagePath("E:/Folder", "file", "300", undefined);
+      const actualOutput = getImagePath(path.join("E:", "Folder"), "file", "300", undefined);
       const expectedOutput = path.join("E:", "Folder", "file_w300.jpg");
       expect(actualOutput).toBe(expectedOutput);
     });
 
     it("test getImagePath with height only", async () => {
-      const actualOutput = getImagePath("E:/Folder", "file", undefined, "300");
+      const actualOutput = getImagePath(path.join("E:", "Folder"), "file", undefined, "300");
       const expectedOutput = path.join("E:", "Folder", "file_h300.jpg");
       expect(actualOutput).toBe(expectedOutput);
     });
 
     it("test getImagePath with undefined width and height", async () => {
       const actualOutput = getImagePath(
-        "E:/Folder",
+        path.join("E:", "Folder"),
         "file",
         undefined,
         undefined
